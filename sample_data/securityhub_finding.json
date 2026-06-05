@@ -1,0 +1,7 @@
+{
+  "resource_id": "ec2-instance-001",
+  "securityhub_critical": true,
+  "public_access": false,
+  "unencrypted": false,
+  "unused_security_group": false
+}

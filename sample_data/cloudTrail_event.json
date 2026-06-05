@@ -1,0 +1,6 @@
+{
+  "resource_id": "s3-bucket-001",
+  "public_access": true,
+  "unencrypted": false,
+  "unused_security_group": true
+}
