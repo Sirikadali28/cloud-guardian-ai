@@ -1,8 +1,23 @@
+<div align="center">
+
 # Cloud Guardian AI
+### Serverless AWS Compliance & Security Monitoring Platform
 
-**Serverless AWS Compliance & Risk Monitoring Platform**
+A hands-on AWS security analytics platform demonstrating compliance evaluation, alerting, operational monitoring, audit visibility, and security analysis using AWS-native serverless services.
 
-> A production-grade, fully serverless cloud security platform that continuously monitors AWS infrastructure, evaluates compliance violations, scores risks, and delivers real-time security intelligence — built entirely on AWS-native services.
+![AWS](https://img.shields.io/badge/AWS-Cloud_Security-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=flat-square&logo=terraform&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+</div>
+
+---
+
+## Overview
+
+Cloud Guardian AI is a serverless AWS security monitoring platform built to demonstrate practical implementation of compliance evaluation, security alerting, audit visibility, and findings analysis using AWS-native services.
+
+The project focuses on real implementation evidence rather than theoretical architecture, showcasing how multiple AWS services work together to improve security visibility without managing servers.
 
 ---
 
@@ -12,154 +27,156 @@
 
 ---
 
-## Overview
+## Platform Demonstration
 
-Cloud Guardian AI ingests security and operational events from multiple AWS sources, evaluates them against compliance rules, computes risk severity scores, dispatches alerts, persists findings to a centralized data lake, and surfaces actionable insights through live dashboards — all without managing a single server.
+![Cloud Guardian AI Demo](screenshots/cloud-guardian-demo.gif)
+
+The demonstration highlights the end-to-end workflow, including Lambda processing, SNS notifications, CloudWatch monitoring, Athena analytics, CloudTrail auditing, and AWS Config compliance visibility.
+
+---
+
+## Implemented Workflow
+
+```text
+Lambda Compliance Engine
+        │
+        ▼
+Amazon S3 Findings Storage
+        │
+        ▼
+AWS Glue Data Catalog
+        │
+        ▼
+Amazon Athena Analytics
+        │
+        ▼
+CloudWatch Monitoring
+
+Critical Findings
+        │
+        ▼
+Amazon SNS Email Alerts
+
+Operational Activity
+        │
+        ▼
+AWS CloudTrail
+
+Compliance Visibility
+        │
+        ▼
+AWS Config
+```
 
 ---
 
 ## Key Features
 
 | Feature | Description |
-|---|---|
-| Real-time ingestion | Streams AWS events via Amazon Kinesis Data Streams |
-| Compliance evaluation | Automated rule checks via AWS Lambda |
-| Risk scoring | Severity-based compliance scoring engine |
-| Instant alerts | SNS-based email and SMS notifications |
-| Data lake | Centralized JSON / Parquet findings storage on S3 |
-| ETL pipeline | AWS Glue cataloging and transformation |
-| SQL analytics | Athena-powered ad-hoc security queries |
-| Dashboards | QuickSight compliance and risk trend visualizations |
-| Infrastructure as Code | Fully reproducible Terraform deployment |
+|-----------|-------------|
+| Compliance Evaluation | Lambda-based security checks and event processing |
+| Email Notifications | SNS alerts for critical findings |
+| Findings Storage | Centralized S3 storage |
+| Operational Monitoring | CloudWatch dashboards and metrics |
+| Security Analytics | Athena query capabilities |
+| Metadata Cataloging | AWS Glue integration |
+| Audit Visibility | CloudTrail event tracking |
+| Compliance Monitoring | AWS Config dashboards |
+| Infrastructure as Code | Terraform provisioning |
 
 ---
 
-## Architecture Flow
-
-```
-CloudTrail  ──┐
-AWS Config  ──┤──▶  Kinesis Streams  ──▶  Lambda Engine  ──┬──▶  SNS Alerts
-Security Hub──┤                                             ├──▶  S3 Data Lake  ──▶  Glue ETL  ──▶  Athena  ──▶  QuickSight
-VPC Flow Logs─┘                                             └──▶  Risk Scoring Engine
-```
-
-1. **Ingest** — CloudTrail, AWS Config, Security Hub, and VPC Flow Logs emit events continuously.
-2. **Stream** — Amazon Kinesis Data Streams buffers and fans out events in real time.
-3. **Evaluate** — AWS Lambda applies compliance rules against each event.
-4. **Score** — The Risk Scoring Engine calculates compliance severity for each finding.
-5. **Alert** — Critical findings trigger SNS notifications via email and SMS.
-6. **Store** — All findings are persisted to Amazon S3 in JSON / Parquet format.
-7. **Catalog** — AWS Glue crawls and catalogs the S3 data lake.
-8. **Analyse** — Athena runs SQL analytics over the cataloged findings.
-9. **Visualise** — QuickSight renders live compliance dashboards and risk trends.
-
----
-
-## AWS Services
+## AWS Services Used
 
 | Service | Purpose |
-|---|---|
-| Amazon Kinesis | Real-time event streaming |
+|----------|-----------|
 | AWS Lambda | Compliance evaluation engine |
-| Amazon SNS | Alert notifications (email / SMS) |
-| Amazon S3 | Data lake — JSON / Parquet storage |
-| AWS Glue | ETL pipeline and Data Catalog |
-| Amazon Athena | Serverless SQL analytics |
-| Amazon QuickSight | Compliance dashboards |
-| AWS Config | Resource compliance monitoring |
-| AWS CloudTrail | API activity and audit logging |
-| AWS Security Hub | Aggregated security findings |
-| VPC Flow Logs | Network traffic visibility |
-| Terraform | Infrastructure as Code |
+| Amazon S3 | Findings storage |
+| Amazon SNS | Email notifications |
+| Amazon CloudWatch | Monitoring and metrics |
+| AWS Glue | Metadata catalog |
+| Amazon Athena | Security analytics |
+| AWS CloudTrail | Audit event tracking |
+| AWS Config | Compliance visibility |
+| Terraform | Infrastructure provisioning |
+| IAM | Access management |
 
 ---
-## AWS Infrastructure Screenshots
 
-### Lambda Functions
-![Lambda Functions](screenshots/lambda-functions.png)
+## Key Implementation Evidence
 
-### Lambda Compliance Engine
-![Lambda Code](screenshots/lambda-code.png)
+### Athena Security Analysis
 
-### S3 Data Lake
-![S3 Buckets](screenshots/s3-buckets.png)
+![Athena Security Analysis](screenshots/athena-security-analysis-results.png)
 
-### IAM Security Role
-![IAM Role](screenshots/iam-role.png)
+### AWS Config Compliance Dashboard
 
-### CloudWatch Monitoring
-![CloudWatch Dashboard](screenshots/cloudwatch-dashboard.png)
+![AWS Config Dashboard](screenshots/aws-config-compliance-dashboard.png)
 
-### CloudWatch Logs
-![CloudWatch Logs](screenshots/cloudwatch-logs.png)
+---
 
-### Glue Crawler
-![Glue Crawler](screenshots/glue-crawler.png)
-
-### Glue Database
-![Glue Database](screenshots/glue-database.png)
-
-### Athena Query Editor
-![Athena Editor](screenshots/athena-editor.png)
-
-### Athena Results
-![Athena Results](screenshots/athena-query-results.png)
-## Project Structure
+## Repository Structure
 
 ```text
-Cloud-guardian-ai/
-│
-├── architecture/          # Architecture diagrams
-├── athena/                # Saved queries and views
-├── glue/                  # ETL job scripts
-├── lambda/                # Compliance evaluation functions
-├── sample_data/           # Sample event payloads for testing
-├── terraform/             # IaC — all AWS resources
-├── tests/                 # Unit and integration tests
-└── .github/               # CI/CD workflows
+Cloud-Guardian-AI/
+├── architecture/
+│   └── architecture.png
+├── lambda/
+│   ├── compliance-engine.py
+│   └── requirements.txt
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+├── screenshots/
+│   ├── cloud-guardian-demo.gif
+│   ├── athena-security-analysis-results.png
+│   ├── aws-config-compliance-dashboard.png
+│   ├── cloudtrail-audit-events.png
+│   ├── sns-security-alert-email.jpeg
+│   ├── cloudwatch-monitoring-dashboard.png
+│   ├── cloudwatch-metrics-overview.png
+│   ├── lambda-functions-overview.png
+│   ├── s3-findings-storage.png
+│   └── supporting-evidence/
+│       ├── athena-query-editor.png
+│       ├── cloudwatch-execution-logs.png
+│       ├── glue-crawler-configuration.png
+│       ├── glue-data-catalog.png
+│       ├── iam-security-role.png
+│       ├── lambda-compliance-engine-code.png
+│       └── aws-config-rules-overview.png
+├── README.md
+├── LICENSE
+└── .gitignore
 ```
 
 ---
 
-## Sample Compliance Checks
+## Results
 
-- **Public S3 Bucket Detection** — flags buckets with public ACLs or bucket policies
-- **Missing Encryption Detection** — identifies unencrypted S3 objects and EBS volumes
-- **Security Group Review** — detects overly permissive inbound rules (0.0.0.0/0)
-- **Security Hub Critical Findings** — surfaces CRITICAL severity findings automatically
-- **Compliance Violation Monitoring** — continuous Config rule evaluation and alerting
+This project successfully demonstrated:
 
----
-
-## Athena Analytics Examples
-
-**Findings by severity:**
-```sql
-SELECT   severity,
-         COUNT(*) AS total_findings
-FROM     cloud_guardian_findings
-GROUP BY severity
-ORDER BY total_findings DESC;
-```
-
-**Top compliance issues:**
-```sql
-SELECT   issue,
-         COUNT(*) AS occurrences
-FROM     cloud_guardian_findings
-GROUP BY issue
-ORDER BY occurrences DESC;
-```
+- Serverless compliance evaluation using AWS Lambda
+- Email-based security alerting through Amazon SNS
+- Centralized findings storage using Amazon S3
+- Monitoring and metrics using CloudWatch
+- Metadata cataloging with AWS Glue
+- Security analytics using Athena
+- Audit event tracking through CloudTrail
+- Compliance visibility using AWS Config
+- Infrastructure provisioning using Terraform
 
 ---
 
-## Security Dashboard Insights
+## Challenges Faced
 
-- **Compliance Violations** — breakdown by rule and resource type
-- **Risk Distribution** — severity heatmap across the environment
-- **Critical Findings** — real-time feed of high-priority issues
-- **Resource Security Trends** — compliance posture over time
-- **Alert History** — SNS notification log and response tracking
+- Managing IAM permissions across multiple AWS services
+- Structuring findings for efficient Athena queries
+- Integrating serverless services while maintaining simplicity
+- Validating Lambda execution through CloudWatch logs
+- Configuring CloudTrail and AWS Config within free-tier limitations
+- Capturing implementation evidence without incurring unnecessary costs
 
 ---
 
@@ -167,35 +184,38 @@ ORDER BY occurrences DESC;
 
 ### Prerequisites
 
-- AWS account with appropriate IAM permissions
-- [Terraform](https://developer.hashicorp.com/terraform/downloads) >= 1.5
+- AWS Account
+- Terraform >= 1.5
+- AWS CLI configured
 - Python 3.11+
-- [AWS CLI](https://aws.amazon.com/cli/) configured (`aws configure`)
 
 ### Deploy
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-org>/cloud-guardian-ai.git
+git clone https://github.com/Sirikadali28/cloud-guardian-ai.git
+
 cd cloud-guardian-ai
 
-# Initialise and deploy infrastructure
 terraform init
 terraform plan
 terraform apply
 ```
 
-> **Note:** Review `terraform/variables.tf` to customise region, bucket names, and SNS endpoints before applying.
+> **Note:** Depending on AWS account settings and free-tier restrictions, certain IAM permissions and service configurations may require manual validation after deployment.
 
 ---
 
 ## Future Enhancements
 
-- [ ] Automated remediation workflows (Lambda + Systems Manager)
-- [ ] Multi-account AWS monitoring via AWS Organizations
-- [ ] Expanded Security Hub integration (CIS, PCI-DSS benchmarks)
-- [ ] Machine learning-based anomaly detection
-- [ ] Cost optimization recommendations alongside security findings
+- Integrate AWS Security Hub findings.
+- Build QuickSight security dashboards.
+- Add automated remediation workflows.
+
+---
+
+## Project Status
+
+**Status:** Completed as a hands-on AWS security implementation and learning project.
 
 ---
 
@@ -203,15 +223,6 @@ terraform apply
 
 **Siri**
 
-Cloud Guardian AI demonstrates a modern, fully serverless approach to cloud compliance monitoring, risk assessment, security analytics, and operational visibility on AWS.
+Cloud Guardian AI demonstrates practical experience with AWS serverless security services, emphasizing compliance visibility, operational monitoring, and security analytics through real implementations.
 
 ---
-
-<div align="center">
-
-![AWS](https://img.shields.io/badge/AWS-Serverless-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-
-</div>
